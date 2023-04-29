@@ -1,0 +1,45 @@
+Menambahkan Menu => 
+
+cat <<'EOF' >/usr/lib/lua/luci/controller/KodExplorer.lua
+module("luci.controller.KodExplorer", package.seeall)
+function index()
+entry({"admin","system","KodExplorer"}, template("KodExplorer"), _("File Manager"), 45).leaf=true
+end
+EOF
+
+MengLinkkan URL =>
+
+cat <<'EOF' >/usr/lib/lua/luci/view/KodExplorer.htm
+<%+header%>
+<div class="cbi-map"><br>
+<iframe id="KodExplorer" style="width: 100%; min-height: 100vh; border: none; border-radius: 2px;"></iframe>
+</div>
+<script type="text/javascript">
+document.getElementById("KodExplorer").src = window.location.protocol + "//" + window.location.host + "/KodExplorer/index.php";
+</script>
+<%+footer%>
+EOF
+
+NETDATA 
+
+Menambahkan Menu => 
+
+cat <<'EOF' >/usr/lib/lua/luci/controller/NetData.lua
+module("luci.controller.NetData", package.seeall)
+function index()
+entry({"admin","system","NetData"}, template("NetData"), _("NetData"), 45).leaf=true
+end
+EOF
+
+cat <<'EOF' >/usr/lib/lua/luci/view/NetData.htm
+<%+header%>
+<div class="cbi-map"><br>
+<iframe id="NetData" style="width: 100%; min-height: 100vh; border: none; border-radius: 2px;"></iframe>
+</div>
+<script type="text/javascript">
+document.getElementById("NetData").src = window.location.protocol + "//" + window.location.host + "http://127.0.0.1:19999";
+</script>
+<%+footer%>
+EOF
+
+
